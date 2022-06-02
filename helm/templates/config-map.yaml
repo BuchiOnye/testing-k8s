@@ -10,8 +10,7 @@ metadata:
    environment: {{ .Values.environment | quote }}
 data:
   application.properties: |-
-    aws.secretsmanager.secretids= {{ .Values.aws.secretsmanager.secretids }}
-
+    
     # loggings
     logging.level.root=INFO
     logging.level.org.springframework.web=INFO
