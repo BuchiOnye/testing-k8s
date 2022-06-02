@@ -1,13 +1,21 @@
+FROM maven:3.6.3-jdk-11 AS MAVEN_BUILD
+
+WORKDIR /build/
+
+COPY pom.xml /build/
+
+COPY src /build/src/
+
+RUN mvn clean -U package
+
 FROM openjdk:11.0.3-jre-slim
 
-VOLUME /tmp
-
-WORKDIR /opt/holidu/apartment-api
-ADD target/testing-k8s.jar /opt/holidu/test-k8s/app.jar
-
-ENTRYPOINT ["java", "-XX:MinRAMPercentage=25.0", \
-                    "-XX:MaxRAMPercentage=60.0", \
-                    "-Djava.security.egd=file:/dev/./urandom", \
-                    "-jar", "app.jar"]
+WORKDIR /app
 
 EXPOSE 8080
+
+COPY --from=MAVEN_BUILD /build/target/testing-k8s.jar /app
+
+ENTRYPOINT ["java", "-jar", "testing-k8s.jar"]
+
+
