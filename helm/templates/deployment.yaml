@@ -14,7 +14,6 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
-      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
