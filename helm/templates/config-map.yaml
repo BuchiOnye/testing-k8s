@@ -3,14 +3,10 @@ kind: ConfigMap
 metadata:
  name: {{ .Values.name }}
  labels:
-   team: partner-integration
    app: {{ .Values.name | quote }}
-   branch: {{ .Values.branch | quote }}
-   commit: {{ .Values.commit | quote }}
-   environment: {{ .Values.environment | quote }}
 data:
   application.properties: |-
-    
+
     # loggings
     logging.level.root=INFO
     logging.level.org.springframework.web=INFO
