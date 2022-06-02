@@ -23,20 +23,6 @@ spec:
           name: http
         - containerPort: {{ .Values.service.adminPort }}
           name: web
-        livenessProbe:
-          httpGet:
-            path: "/"
-            port: {{ .Values.service.targetPort }}
-          initialDelaySeconds: 200
-          periodSeconds: 15
-          timeoutSeconds: 5
-          failureThreshold: 5
-        readinessProbe:
-          httpGet:
-            path: "/"
-            port: {{ .Values.service.targetPort }}
-          initialDelaySeconds: 200
-          periodSeconds: 15
         resources:
           limits:
             cpu: 100m
