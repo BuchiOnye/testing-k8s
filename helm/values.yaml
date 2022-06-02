@@ -1,0 +1,27 @@
+replicas: 1
+minReplicas: 1
+maxReplicas: 1
+targetCpu: 60
+
+name: "testing-k8s"
+
+ingressClass: "nginx"
+
+image: "kouza/in28mins"
+imageTag: "latest"
+imagePullPolicy: "IfNotPresent"
+
+service:
+  hostname: "no-eye-deer.holidu.io"
+  port: 80
+  targetPort: 8080
+  adminPort: 8081
+  type: Ingress
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 900Mi
+  requests:
+    cpu: 300m
+    memory: 800Mi

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: {{ .Values.name }}
+ labels:
+   team: partner-integration
+   app: {{ .Values.name | quote }}
+   branch: {{ .Values.branch | quote }}
+   commit: {{ .Values.commit | quote }}
+   environment: {{ .Values.environment | quote }}
+data:
+  application.properties: |-
+    aws.secretsmanager.secretids= {{ .Values.aws.secretsmanager.secretids }}
+
+    # loggings
+    logging.level.root=INFO
+    logging.level.org.springframework.web=INFO
+    logging.level.org.hibernate=INFO
+    spring.output.ansi.enabled=ALWAYS
+
+    # Application Server
+    graceful.shutdown.enabled=true
+    server.forward-headers-strategy=framework
+    server.error.include-message=always
+    spring.application.name={{ .Values.name }}
+    spring.main.banner-mode=off
+
+    management.metrics.export.prometheus.enabled=true
+    management.metrics.tags.application=${spring.application.name}
+    management.metrics.tags.app=${spring.application.name}
+    management.metrics.mongo.command.enabled=false
+    management.metrics.mongo.connectionpool.enabled=false
+    springfox.documentation.auto-startup=false
+
+    management.endpoints.web.exposure.include=*
+    management.server.port={{ .Values.service.adminPort }}

@@ -1,0 +1,6 @@
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart for the No Eye Deer
+name: no-eye-deer
+version: 0.0.1
+icon: https://www.holidu.de/img/logo/appicon.svg
