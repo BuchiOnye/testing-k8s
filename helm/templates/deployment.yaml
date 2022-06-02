@@ -25,7 +25,7 @@ spec:
           name: web
         livenessProbe:
           httpGet:
-            path: "/actuator/info"
+            path: "/"
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 200
           periodSeconds: 15
@@ -33,7 +33,7 @@ spec:
           failureThreshold: 5
         readinessProbe:
           httpGet:
-            path: "/actuator/health"
+            path: "/"
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 200
           periodSeconds: 15
