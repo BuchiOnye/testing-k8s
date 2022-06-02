@@ -1,0 +1,6 @@
+name: testing-k8s
+command: ["sh"]
+sync:
+  - .:/src
+persistentVolume:
+  enabled: false
