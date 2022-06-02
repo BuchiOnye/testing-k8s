@@ -25,18 +25,18 @@ spec:
           name: web
         livenessProbe:
           httpGet:
-            path: /
-            port: 80
+            path: "/actuator/info"
+            port: { { .Values.service.adminPort } }
           initialDelaySeconds: 90
           periodSeconds: 15
           timeoutSeconds: 5
           failureThreshold: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 90
-          periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: "/actuator/health"
+              port: { { .Values.service.adminPort } }
+            initialDelaySeconds: 90
+            periodSeconds: 15
         resources:
           limits:
             cpu: 100m
