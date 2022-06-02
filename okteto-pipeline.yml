@@ -1,0 +1,5 @@
+deploy:
+  - okteto build --tag okteto.dev/testing-k8s:${OKTETO_GIT_COMMIT} .
+  - helm upgrade --install testing-k8s helm --set image.repository=okteto.dev/testing-k8s --set image.tag=${OKTETO_GIT_COMMIT} --set ingress.enabled=false
+devs:
+  - okteto.yml
